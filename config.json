@@ -1,10 +1,10 @@
 {
-  "days": 7,
-  "assignees": ["Alice", "Bob", "Charlie"],
+  "days": 30,
+  "assignees": ["Alice", "Bob", "Charlie", "Sarah", "James", "Luke"],
   "constraints": [
     {
       "name": "coverage",
-      "params": {"num_needed": 3}
+      "params": {"num_needed": 2}
     },
     {
       "name": "fairness",

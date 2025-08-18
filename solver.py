@@ -1,71 +1,8 @@
 import json
-import importlib
 from ortools.sat.python import cp_model
+from utils.loader import load_constraints
 
 
-# -----------------------------
-# Constraint Base Class
-# -----------------------------
-class BaseConstraint:
-    name: str
-
-    def apply(self, model: cp_model.CpModel, variables, params: dict):
-        raise NotImplementedError
-
-
-# -----------------------------
-# Constraint 1: Coverage
-# -----------------------------
-class CoverageConstraint(BaseConstraint):
-    name = "coverage"
-
-    def apply(self, model, variables, params):
-        """Ensure exactly `num_needed` people are assigned per day"""
-        days = variables["days"]
-        assignees = variables["assignees"]
-
-        num_needed = params.get("num_needed", 1)  # default to 1 if not specified
-
-        for d in days:
-            model.Add(sum(assignees[name][d] for name in assignees) == num_needed)
-
-
-# -----------------------------
-# Constraint 2: Fairness
-# -----------------------------
-class FairnessConstraint(BaseConstraint):
-    name = "fairness"
-
-    def apply(self, model, variables, params):
-        """Ensure shifts are fairly distributed"""
-        assignees = variables["assignees"]
-        days = variables["days"]
-
-        totals = {name: sum(vars) for name, vars in assignees.items()}
-
-        min_total = model.NewIntVar(0, len(days), "min_total")
-        max_total = model.NewIntVar(0, len(days), "max_total")
-
-        model.AddMinEquality(min_total, list(totals.values()))
-        model.AddMaxEquality(max_total, list(totals.values()))
-
-        max_diff = params.get("max_difference", 1)
-        model.Add(max_total - min_total <= max_diff)
-
-
-# -----------------------------
-# Constraint Loader
-# -----------------------------
-def load_constraints():
-    return {
-        "coverage": CoverageConstraint,
-        "fairness": FairnessConstraint,
-    }
-
-
-# -----------------------------
-# Solver Builder
-# -----------------------------
 def build_solver(config_path="config.json"):
     with open(config_path) as f:
         config = json.load(f)
@@ -98,9 +35,6 @@ def build_solver(config_path="config.json"):
     return model, variables
 
 
-# -----------------------------
-# Run Example
-# -----------------------------
 if __name__ == "__main__":
     model, variables = build_solver("config.json")
 
@@ -122,4 +56,3 @@ if __name__ == "__main__":
             print(f"  {name}: {total}")
     else:
         print("❌ No solution found")
-
