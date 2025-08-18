@@ -1,0 +1,14 @@
+{
+  "days": 7,
+  "assignees": ["Alice", "Bob", "Charlie"],
+  "constraints": [
+    {
+      "name": "coverage",
+      "params": {"num_needed": 3}
+    },
+    {
+      "name": "fairness",
+      "params": { "max_difference": 1 }
+    }
+  ]
+}
