@@ -80,7 +80,8 @@ def export_roster_to_csv(schedule, filename="roster.csv"):
 def convert_roster_to_html(schedule):
     """
     Converts the schedule dictionary into a styled HTML table string,
-    including totals at the bottom.
+    including totals at the bottom, with custom color styling.
+    The day column is no longer highlighted separately.
     """
     # Extract unique shift names
     shifts = sorted({shift for day in schedule.values() for shift in day})
@@ -97,12 +98,14 @@ def convert_roster_to_html(schedule):
                 if is_weekend:
                     weekend_totals[name] = weekend_totals.get(name, 0) + 1
 
-    # --- Style for the HTML table ---
+    # --- CSS styling ---
     style = """
     <style>
         table { border-collapse: collapse; width: 80%; margin: 20px auto; font-family: Arial, sans-serif; }
         th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: center; }
-        th { background-color: #f2f2f2; font-weight: bold; }
+        th { background-color: #cce5ff; } /* Header row */
+        td.date-col { background-color: #cce5ff; } /* Date column only */
+        tr.weekend-row { background-color: #e6f0ff; } /* Entire weekend row */
         h2 { text-align: center; }
     </style>
     """
@@ -113,8 +116,13 @@ def convert_roster_to_html(schedule):
 
     for date, assignments in sorted(schedule.items()):
         day_name = datetime.strptime(date, "%Y-%m-%d").strftime("%A")
-        html += "<tr>"
-        html += f"<td>{date}</td><td>{day_name}</td>"
+        is_weekend = day_name in ["Saturday", "Sunday"]
+
+        # Add row with weekend highlight if weekend
+        row_class = " class='weekend-row'" if is_weekend else ""
+        html += f"<tr{row_class}>"
+        html += f"<td class='date-col'>{date}</td>"
+        html += f"<td>{day_name}</td>"  # Removed highlight for the Day column
         html += "".join(f"<td>{', '.join(assignments.get(shift, []))}</td>" for shift in shifts)
         html += "</tr>"
 

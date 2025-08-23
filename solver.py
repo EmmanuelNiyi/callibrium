@@ -21,7 +21,7 @@ def main():
     # Map constraints
     constraint_map = {
         "coverage": coverage.CoverageConstraint,
-        "fairness": fairness.FairnessConstraint,
+        "fairness": fairness.BaseFairnessConstraint,
         # "weekend_fairness": WeekendFairnessConstraint,
         "no_consecutive": no_consecutive
     }

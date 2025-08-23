@@ -3,7 +3,7 @@ from ortools.sat.python import cp_model
 import math
 
 
-class FairnessConstraint:
+class BaseFairnessConstraint:
     @staticmethod
     def apply(model, vars, assignees, blocks, params=None):
         """
