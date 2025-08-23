@@ -1,14 +1,26 @@
 {
-  "days": 30,
-  "assignees": ["Alice", "Bob", "Charlie", "Sarah", "James", "Luke"],
-  "constraints": [
-    {
-      "name": "coverage",
-      "params": {"num_needed": 2}
+  "start_date": "2025-08-1",
+  "end_date": "2025-08-31",
+  "shifts": ["Ward", "Emergency"],
+  "assignees": ["Alice", "Bob", "Carl", "David", "Emmanuel", "Fred", "Jude", "Ade", "Peace", "Paul", "Ada"],
+  "constraints": {
+    "coverage": {
+      "default": {"min": 1, "max": 1},
+      "weekend": {
+        "Ward": {"min": 2, "max": 2},
+        "Emergency": {"min": 1, "max": 1}
+      },
+      "weekday": {
+        "Ward": {"min": 1, "max": 1},
+        "Emergency": {"min": 1, "max": 1}
+      }
     },
-    {
-      "name": "fairness",
-      "params": { "max_difference": 1 }
+    "fairness": {
+      "min_shifts": 1,
+      "balance": "loose"
+    },
+    "no_consecutive": {
+      "min_gap": 1
     }
-  ]
+  }
 }

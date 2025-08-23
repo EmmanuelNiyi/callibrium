@@ -1,58 +1,60 @@
 import json
 from ortools.sat.python import cp_model
-from utils.loader import load_constraints
+
+from constraints.weekend_fairness import WeekendFairnessConstraint
+from utils.output import print_schedule, print_totals, export_roster_to_csv, convert_roster_to_html
+from utils.timeblocks import generate_timeblocks
+import constraints.coverage as coverage
+import constraints.fairness as fairness
+import constraints.no_consecutive as no_consecutive
+import model as mdl
 
 
-def build_solver(config_path="config.json"):
-    with open(config_path) as f:
+def main():
+    # Load config
+    with open("config.json") as f:
         config = json.load(f)
 
-    model = cp_model.CpModel()
+    # Generate blocks
+    blocks = generate_timeblocks(config["start_date"], config["end_date"], config["shifts"])
 
-    # --- Step 1: Variables ---
-    days = range(config["days"])
-    assignees = config["assignees"]
-
-    assignments = {
-        name: [model.NewBoolVar(f"{name}_day{d}") for d in days]
-        for name in assignees
+    # Map constraints
+    constraint_map = {
+        "coverage": coverage.CoverageConstraint,
+        "fairness": fairness.FairnessConstraint,
+        # "weekend_fairness": WeekendFairnessConstraint,
+        "no_consecutive": no_consecutive
     }
 
-    variables = {"days": days, "assignees": assignments}
+    # Build model
+    model, vars = mdl.build_model(config, constraint_map, blocks)
 
-    # --- Step 2: Apply constraints ---
-    available_constraints = load_constraints()
-    for c_cfg in config["constraints"]:
-        cname = c_cfg["name"]
-        params = c_cfg.get("params", {})
-
-        if cname not in available_constraints:
-            raise ValueError(f"Unknown constraint: {cname}")
-
-        constraint = available_constraints[cname]()
-        constraint.apply(model, variables, params)
-
-    return model, variables
-
-
-if __name__ == "__main__":
-    model, variables = build_solver("config.json")
-
+    # Solve
     solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = 10
     status = solver.Solve(model)
 
     if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
-        days = variables["days"]
-        assignees = variables["assignees"]
+        # Organize schedule by day and shift
+        schedule = {}
+        for b, block in enumerate(blocks):
+            date = block["date"]
+            shift = block["shift"]
+            assigned = [config["assignees"][a] for a in range(len(config["assignees"]))
+                        if solver.Value(vars[a][b]) == 1]
+            if date not in schedule:
+                schedule[date] = {}
+            schedule[date][shift] = assigned
 
-        print("📅 Schedule:")
-        for d in days:
-            assigned = [name for name, vars in assignees.items() if solver.Value(vars[d]) == 1]
-            print(f"  Day {d+1}: {', '.join(assigned)}")
+        print_schedule(schedule, config)
+        print_totals(vars, solver, blocks, config)
 
-        print("\n📊 Shifts per person:")
-        for name, vars in assignees.items():
-            total = sum(solver.Value(v) for v in vars)
-            print(f"  {name}: {total}")
+        export_roster_to_csv(schedule)
+        convert_roster_to_html(schedule)
+
     else:
         print("❌ No solution found")
+
+
+if __name__ == "__main__":
+    main()

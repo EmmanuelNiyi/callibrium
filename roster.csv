@@ -1,0 +1,48 @@
+Date,Day,Emergency,Ward
+2025-08-01,Friday,Ada,Fred
+2025-08-02,Saturday,Ada,"Jude, Ade"
+2025-08-03,Sunday,Emmanuel,"Fred, Ade"
+2025-08-04,Monday,Fred,Ade
+2025-08-05,Tuesday,Carl,David
+2025-08-06,Wednesday,Peace,Ade
+2025-08-07,Thursday,Carl,Alice
+2025-08-08,Friday,Paul,Alice
+2025-08-09,Saturday,Alice,"David, Emmanuel"
+2025-08-10,Sunday,Paul,"Emmanuel, Peace"
+2025-08-11,Monday,Jude,Alice
+2025-08-12,Tuesday,Fred,Carl
+2025-08-13,Wednesday,Emmanuel,Bob
+2025-08-14,Thursday,Carl,David
+2025-08-15,Friday,Fred,Jude
+2025-08-16,Saturday,Paul,"Emmanuel, Peace"
+2025-08-17,Sunday,Paul,"Fred, Jude"
+2025-08-18,Monday,Carl,Jude
+2025-08-19,Tuesday,Fred,Alice
+2025-08-20,Wednesday,Alice,Ada
+2025-08-21,Thursday,Carl,Jude
+2025-08-22,Friday,Alice,Bob
+2025-08-23,Saturday,Ada,"Bob, Emmanuel"
+2025-08-24,Sunday,David,"Bob, Carl"
+2025-08-25,Monday,Bob,Ade
+2025-08-26,Tuesday,Paul,David
+2025-08-27,Wednesday,Peace,Bob
+2025-08-28,Thursday,Bob,Ada
+2025-08-29,Friday,Paul,David
+2025-08-30,Saturday,Ade,"Emmanuel, Peace"
+2025-08-31,Sunday,Ada,"Peace, Paul"
+
+
+
+Summary 📊
+Name,Total Shifts,Weekend Shifts
+Ada,6,3
+Ade,6,3
+Alice,7,1
+Bob,7,2
+Carl,7,1
+David,6,2
+Emmanuel,7,6
+Fred,7,2
+Jude,6,2
+Paul,7,4
+Peace,6,4
