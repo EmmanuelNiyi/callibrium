@@ -1,7 +1,6 @@
 import json
 from ortools.sat.python import cp_model
 
-from constraints.weekend_fairness import WeekendFairnessConstraint
 from utils.output import print_schedule, print_totals, export_roster_to_csv, convert_roster_to_html
 from utils.timeblocks import generate_timeblocks
 import constraints.coverage as coverage
@@ -21,9 +20,9 @@ def main():
     # Map constraints
     constraint_map = {
         "coverage": coverage.CoverageConstraint,
+        "no_consecutive": no_consecutive,
+        "weekend_fairness": fairness.WeekendFairnessConstraint,
         "fairness": fairness.BaseFairnessConstraint,
-        # "weekend_fairness": WeekendFairnessConstraint,
-        "no_consecutive": no_consecutive
     }
 
     # Build model

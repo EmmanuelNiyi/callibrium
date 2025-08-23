@@ -2,7 +2,7 @@
   "start_date": "2025-08-1",
   "end_date": "2025-08-31",
   "shifts": ["Ward", "Emergency"],
-  "assignees": ["Alice", "Bob", "Carl", "David", "Emmanuel", "Fred", "Jude", "Ade", "Peace", "Paul", "Ada"],
+  "assignees": ["AJIBOLA", "AZEEZAH", "BRAVO", "EBEKU", "FATIMA", "GIFT", "IFY", "ISIOMA", "JOSHUA", "MARYAM", "MORGAN", "NIYI", "OBIOHA", "OJ", "OKEH", "OKOYE", "ROYAL", "SARAH", "SHAFA’UN", "TEMILADE", "VICTOR", "ZAINAB"],
   "constraints": {
     "coverage": {
       "default": {"min": 1, "max": 1},
@@ -17,7 +17,10 @@
     },
     "fairness": {
       "min_shifts": 1,
-      "balance": "loose"
+      "balance": "medium"
+    },
+    "weekend_fairness": {
+      "weight": 1
     },
     "no_consecutive": {
       "min_gap": 1
