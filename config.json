@@ -19,8 +19,7 @@
       "min_shifts": 1,
       "balance": "medium"
     },
-    "weekend_fairness": {
-      "weight": 1
+    "weekend_fairness": {"strict": false, "weight": 1
     },
     "no_consecutive": {
       "min_gap": 1

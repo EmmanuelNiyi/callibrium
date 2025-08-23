@@ -1,46 +1,59 @@
 Date,Day,Emergency,Ward
-2025-08-01,Friday,Isioma,Ify
-2025-08-02,Saturday,Isioma,"Gift, Ify"
-2025-08-03,Sunday,Fatima,"Bravo, Ebeku"
-2025-08-04,Monday,Ify,Ebeku
-2025-08-05,Tuesday,Gift,Fatima
-2025-08-06,Wednesday,Ebeku,Ify
-2025-08-07,Thursday,Gift,Ify
-2025-08-08,Friday,Gift,Fatima
-2025-08-09,Saturday,Azeezah,"Ebeku, Joshua"
-2025-08-10,Sunday,Azeezah,"Ebeku, Joshua"
-2025-08-11,Monday,Azeezah,Bravo
-2025-08-12,Tuesday,Bravo,Joshua
-2025-08-13,Wednesday,Fatima,Joshua
-2025-08-14,Thursday,Bravo,Joshua
-2025-08-15,Friday,Azeezah,Fatima
-2025-08-16,Saturday,Isioma,"Bravo, Fatima"
-2025-08-17,Sunday,Joshua,"Fatima, Ify"
-2025-08-18,Monday,Ajibola,Ify
-2025-08-19,Tuesday,Ebeku,Azeezah
-2025-08-20,Wednesday,Azeezah,Ajibola
-2025-08-21,Thursday,Fatima,Gift
-2025-08-22,Friday,Gift,Ajibola
-2025-08-23,Saturday,Ify,"Ajibola, Azeezah"
-2025-08-24,Sunday,Gift,"Ajibola, Azeezah"
-2025-08-25,Monday,Joshua,Bravo
-2025-08-26,Tuesday,Bravo,Isioma
-2025-08-27,Wednesday,Ajibola,Isioma
-2025-08-28,Thursday,Isioma,Ebeku
-2025-08-29,Friday,Isioma,Ebeku
-2025-08-30,Saturday,Isioma,"Ajibola, Bravo"
-2025-08-31,Sunday,Ajibola,"Gift, Joshua"
+2025-08-01,Friday,OJ,JOSHUA
+2025-08-02,Saturday,TEMILADE,"AJIBOLA, BRAVO"
+2025-08-03,Sunday,SARAH,"IFY, JOSHUA"
+2025-08-04,Monday,NIYI,TEMILADE
+2025-08-05,Tuesday,FATIMA,MORGAN
+2025-08-06,Wednesday,SARAH,GIFT
+2025-08-07,Thursday,EBEKU,BRAVO
+2025-08-08,Friday,AJIBOLA,IFY
+2025-08-09,Saturday,OKOYE,"MARYAM, OKEH"
+2025-08-10,Sunday,OKEH,"MARYAM, NIYI"
+2025-08-11,Monday,AZEEZAH,AJIBOLA
+2025-08-12,Tuesday,NIYI,ISIOMA
+2025-08-13,Wednesday,ROYAL,JOSHUA
+2025-08-14,Thursday,BRAVO,AZEEZAH
+2025-08-15,Friday,MARYAM,AZEEZAH
+2025-08-16,Saturday,ROYAL,"OBIOHA, SHAFA’UN"
+2025-08-17,Sunday,ROYAL,"EBEKU, ISIOMA"
+2025-08-18,Monday,OKOYE,ZAINAB
+2025-08-19,Tuesday,BRAVO,EBEKU
+2025-08-20,Wednesday,SHAFA’UN,FATIMA
+2025-08-21,Thursday,ZAINAB,OBIOHA
+2025-08-22,Friday,JOSHUA,VICTOR
+2025-08-23,Saturday,SHAFA’UN,"AZEEZAH, FATIMA"
+2025-08-24,Sunday,VICTOR,"MORGAN, OJ"
+2025-08-25,Monday,OKOYE,TEMILADE
+2025-08-26,Tuesday,AJIBOLA,IFY
+2025-08-27,Wednesday,GIFT,OKEH
+2025-08-28,Thursday,VICTOR,ISIOMA
+2025-08-29,Friday,NIYI,ISIOMA
+2025-08-30,Saturday,ZAINAB,"GIFT, SARAH"
+2025-08-31,Sunday,OJ,"MORGAN, OBIOHA"
 
 
 
 Summary 📊
 Name,Total Shifts,Weekend Shifts
-Ajibola,8,4
-Azeezah,8,4
-Bravo,8,3
-Ebeku,8,3
-Fatima,8,3
-Gift,8,3
-Ify,8,3
-Isioma,8,3
-Joshua,8,4
+AJIBOLA,4,1
+AZEEZAH,4,1
+BRAVO,4,1
+EBEKU,3,1
+FATIMA,3,1
+GIFT,3,1
+IFY,3,1
+ISIOMA,4,1
+JOSHUA,4,1
+MARYAM,3,2
+MORGAN,3,2
+NIYI,4,1
+OBIOHA,3,2
+OJ,3,2
+OKEH,3,2
+OKOYE,3,1
+ROYAL,3,2
+SARAH,3,2
+SHAFA’UN,3,2
+TEMILADE,3,1
+VICTOR,3,1
+ZAINAB,3,1
