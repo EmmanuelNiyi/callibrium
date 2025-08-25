@@ -1,17 +1,18 @@
 import json
 from ortools.sat.python import cp_model
 
-from utils.output import print_schedule, print_totals, export_roster_to_csv, convert_roster_to_html
-from utils.timeblocks import generate_timeblocks
-import constraints.coverage as coverage
-import constraints.fairness as fairness
-import constraints.no_consecutive as no_consecutive
-import model as mdl
+
+import core.constraints.coverage as coverage
+import core.constraints.fairness as fairness
+import core.constraints.no_consecutive as no_consecutive
+from core import model as mdl
+from core.utils.output import print_schedule, print_totals, export_roster_to_csv, convert_roster_to_html
+from core.utils.timeblocks import generate_timeblocks
 
 
-def main():
+def main(config_path="config.json"):
     # Load config
-    with open("config.json") as f:
+    with open(config_path) as f:
         config = json.load(f)
 
     # Generate blocks

@@ -1,4 +1,5 @@
 import csv
+import os
 from datetime import datetime
 
 
@@ -29,11 +30,14 @@ def print_totals(vars, solver, blocks, config):
         print(f"{name}: Total = {totals[name]}, Weekend = {weekend_totals[name]}")
 
 
-def export_roster_to_csv(schedule, filename="roster.csv"):
+def export_roster_to_csv(schedule, filename="output_files/roster.csv"):
     """
     Converts a schedule dictionary into a CSV roster file,
     including day of the week and totals at the bottom.
     """
+    # Ensure the output directory exists
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
     # Get all unique shift types (columns)
     shifts = sorted({shift for day in schedule.values() for shift in day})
 
@@ -63,7 +67,7 @@ def export_roster_to_csv(schedule, filename="roster.csv"):
             row = [date, day_name] + [", ".join(assignments.get(shift, [])) for shift in shifts]
             writer.writerow(row)
 
-        # Add empty line before totals
+        # Add empty lines before totals
         writer.writerow([])
         writer.writerow([])
         writer.writerow([])
@@ -77,16 +81,22 @@ def export_roster_to_csv(schedule, filename="roster.csv"):
     print(f"✅ Roster with totals successfully exported to {filename}")
 
 
-def convert_roster_to_html(schedule):
+def convert_roster_to_html(schedule, filename="output_files/roster.html"):
     """
     Converts the schedule dictionary into a styled HTML table string,
-    including totals at the bottom, with custom color styling.
-    The day column is no longer highlighted separately.
+    including totals at the bottom, with dark-theme color styling.
+    Fully responsive for Streamlit.
     """
+    import os
+    from datetime import datetime
+
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+
     # Extract unique shift names
     shifts = sorted({shift for day in schedule.values() for shift in day})
 
-    # --- Calculate totals and weekend totals ---
+    # Calculate totals and weekend totals
     totals = {}
     weekend_totals = {}
     for day, assignments in schedule.items():
@@ -98,15 +108,27 @@ def convert_roster_to_html(schedule):
                 if is_weekend:
                     weekend_totals[name] = weekend_totals.get(name, 0) + 1
 
-    # --- CSS styling ---
+    # --- CSS styling for dark theme and full-width tables ---
     style = """
     <style>
-        table { border-collapse: collapse; width: 80%; margin: 20px auto; font-family: Arial, sans-serif; }
-        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: center; }
-        th { background-color: #cce5ff; } /* Header row */
-        td.date-col { background-color: #cce5ff; } /* Date column only */
-        tr.weekend-row { background-color: #e6f0ff; } /* Entire weekend row */
-        h2 { text-align: center; }
+        body { background-color: #121212; color: #e0e0e0; font-family: Arial, sans-serif; }
+        table { 
+            border-collapse: collapse; 
+            width: 100%;       /* full width */
+            max-width: 100%;
+            margin: 20px auto; 
+            table-layout: auto; 
+            word-wrap: break-word;
+        }
+        th, td { border: 1px solid #555; padding: 8px 12px; text-align: center; }
+        th { background-color: #1f1f1f; color: #ffffff; }
+        td.date-col { background-color: #1f1f1f; color: #ffffff; }
+        tr.weekend-row { background-color: #2a2a2a; }
+        tr:nth-child(even):not(.weekend-row) { background-color: #1b1b1b; }
+        h2 { text-align: center; color: #ffffff; }
+        @media screen and (max-width: 768px) {
+            table, th, td { font-size: 12px; }
+        }
     </style>
     """
 
@@ -118,11 +140,10 @@ def convert_roster_to_html(schedule):
         day_name = datetime.strptime(date, "%Y-%m-%d").strftime("%A")
         is_weekend = day_name in ["Saturday", "Sunday"]
 
-        # Add row with weekend highlight if weekend
         row_class = " class='weekend-row'" if is_weekend else ""
         html += f"<tr{row_class}>"
         html += f"<td class='date-col'>{date}</td>"
-        html += f"<td>{day_name}</td>"  # Removed highlight for the Day column
+        html += f"<td>{day_name}</td>"
         html += "".join(f"<td>{', '.join(assignments.get(shift, []))}</td>" for shift in shifts)
         html += "</tr>"
 
@@ -137,10 +158,13 @@ def convert_roster_to_html(schedule):
 
     html += "</table>"
 
-    # Save to an HTML file
-    with open("roster.html", "w") as f:
+    # Save to HTML file
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(html)
 
-    print("✅ HTML roster saved to roster.html")
+    print(f"✅ HTML roster saved to {filename}")
 
     return html
+
+
+
