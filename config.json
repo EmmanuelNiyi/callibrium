@@ -1,25 +1,64 @@
 {
-  "start_date": "2025-08-1",
+  "start_date": "2025-08-01",
   "end_date": "2025-08-31",
-  "shifts": ["Ward", "Emergency"],
-  "assignees": ["AJIBOLA", "AZEEZAH", "BRAVO", "EBEKU", "FATIMA", "GIFT", "IFY", "ISIOMA", "JOSHUA", "MARYAM", "MORGAN", "NIYI", "OBIOHA", "OJ", "OKEH", "OKOYE", "ROYAL", "SARAH", "SHAFA’UN", "TEMILADE", "VICTOR", "ZAINAB"],
+  "shifts": [
+    "Day",
+    "Night"
+  ],
+  "assignees": [
+    "EKANEM",
+    "YAHYA",
+    "OKORO",
+    "EBOKA",
+    "PEREPUIGHE",
+    "SULEIMAN",
+    "KAREEM",
+    "AMEH",
+    "NURADEEN",
+    "ASUQUO",
+    "OLAEDO",
+    "AKINDUTIRE",
+    "ENEH",
+    "OKOYE",
+    "AKINSEFUNMI",
+    "GOZIE",
+    "PROMISE",
+    "TINUBU"
+  ],
   "constraints": {
     "coverage": {
-      "default": {"min": 1, "max": 1},
+      "default": {
+        "min": 1,
+        "max": 1
+      },
       "weekend": {
-        "Ward": {"min": 2, "max": 2},
-        "Emergency": {"min": 1, "max": 1}
+        "MEU": {
+          "min": 1,
+          "max": 1
+        },
+        "WARD": {
+          "min": 1,
+          "max": 1
+        }
       },
       "weekday": {
-        "Ward": {"min": 1, "max": 1},
-        "Emergency": {"min": 1, "max": 1}
+        "MEU": {
+          "min": 1,
+          "max": 1
+        },
+        "WARD": {
+          "min": 1,
+          "max": 1
+        }
       }
     },
     "fairness": {
       "min_shifts": 1,
-      "balance": "medium"
+      "balance": "loose"
     },
-    "weekend_fairness": {"strict": false, "weight": 1
+    "weekend_fairness": {
+      "strict": false,
+      "weight": 1
     },
     "no_consecutive": {
       "min_gap": 1
